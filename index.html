@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>JQuery Rescue</title>
+  </head>
+  <body>
+    
+    <h1>JQuery Rescue</h1>
+    
+    <form action="/" method="get" id="my_form">
+      <div class="row">
+        <label for id="name">Name</label>
+        <div class="field">
+          <input type="text" name="name" value="" id="name">
+        </div>
+      </div>
+      <div class="row actions">
+        <p><input type="submit" value="Submit"> or <a href="/">cancel</a>.</p>
+      </div>
+    </form>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1,7,1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="jquery-1.7.1.min.js"><\/script>')</script>
+    <script defer src="autosave.js"></script>
+    <script defer>
+      $(function() {
+        $('form').autosave({
+          saved: function(timestamp) {
+            console.log('Saved: ' + timestamp);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
