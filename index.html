@@ -10,10 +10,30 @@
     
     <form action="/" method="get" id="my_form">
       <div class="row">
-        <label for="name">Name</label>
-        <div class="field">
-          <input type="text" name="name" value="" id="name">
-        </div>
+        <h2>Textbox</h2>
+        <p class="field"><input type="text" name="name" value=""></p>
+      </div>
+      <div class="row">
+        <h2>Radio Buttons</h2>
+        <p class="field"><label><input type="radio" name="radio_group_1" value="Item #1"> Item #1</label></p>
+        <p class="field"><label><input type="radio" name="radio_group_1" value="Item #2"> Item #2</label></p>
+        <p class="field"><label><input type="radio" name="radio_group_1" value="Item #3" selected> Item #3 (default)</label></p>
+      </div>
+      <div class="row">
+        <h2>Select</h2>
+        <p>
+          <select name="select_1">
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2" selected>Option 2 (default)</option>
+            <option value="Option 3">Option 3</option>
+          </select>
+        </p>
+      </div>
+      <div class="row">
+        <h2>Checkboxes</h2>
+        <p class="field"><label><input type="checkbox" name="checkbox_1" value="1" checked> Checkbox #1 (checked by default)</label></p>
+        <p class="field"><label><input type="checkbox" name="checkbox_2" value="1"> Checkbox #2</label></p>
+        <p class="field"><label><input type="checkbox" name="checkbox_3" value="1"> Checkbox #3</label></p>
       </div>
       <div class="row actions">
         <p><input type="submit" value="Submit"> or <a href="/">cancel</a>.</p>
