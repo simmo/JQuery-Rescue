@@ -30,9 +30,6 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         // ID is required
         if (!$this.prop('id')) $.error('Form (#' + $this.index() + ') does not have an ID. An ID is required for jQuery.rescue.');
       
-        // If form has data-autosave set overwrite duration
-        if ($this.attr('data-autosave')) settings.duration = $this.attr('data-autosave');
-      
         // Initalise if not loaded
         if (!data) {
           // Callback
