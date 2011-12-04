@@ -28,7 +28,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         var $this = $(this), data = $this.data('autosave-config');
       
         // ID is required
-        if (!$this.prop('id')) $.error('Form (#' + $this.index() + ') does not have an ID. An ID is required for jQuery.autosave.');
+        if (!$this.prop('id')) $.error('Form (#' + $this.index() + ') does not have an ID. An ID is required for jQuery.rescue.');
       
         // If form has data-autosave set overwrite duration
         if ($this.attr('data-autosave')) settings.duration = $this.attr('data-autosave');
@@ -192,7 +192,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
   };
 
   // Add autosave method to JQuery
-  $.fn.autosave = function(method) {
+  $.fn.rescue = function(method) {
     if (methods[method]) {
       return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
     } else if (typeof method === 'object' || !method) {
