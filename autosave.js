@@ -3,9 +3,11 @@ Storage.prototype.setObject = function(key, value) { return this[key] = JSON.str
 Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
 
 (function($) {
+  var $timer = [];
+  
   var methods = {
     init: function(options) {
-      var $timer = [], settings = {
+      var settings = {
         duration: 1000,
         exclude: '',
         messages: {
@@ -87,35 +89,40 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
             'load.autosave': function() {
               // Exit if no save found
               if (!localStorage[$this.attr('id')]) return;
-            
-              // Get autosave
-              var save = localStorage.getObject($this.attr('id'));
-            
-              // For each bit of saved data
-              $.each(save.data, function(i, field) {
-                // Find element
-                var $element = $this.find('[name="' + field.name + '"]');
               
-                // If element found update it
-                if ($element.length) {
-                  if ($element.is(':radio')) {
-                    $element.filter('[value="' + field.value + '"]').prop('checked', true);
-                  } else if ($element.last().is(':checkbox')) {
-                    $element.last().prop('checked', $element.last().val() === field.value ? true : false);
-                  } else if ($element.is('select')) {
-                    $element.find('option[value="' + field.value + '"]').prop('selected', true);
-                  } else {
-                    $element.val(field.value);
-                  }
+              var autosave = {}, $fields = $this.find('select, input:not([type=submit]):not([type=reset])');
+              
+              // Remove any exluded fields
+              if (settings.exclude !== '') $fields = $fields.not(settings.exclude);
+              
+              // Format data
+              $.each(localStorage.getObject($this.attr('id')).data, function(i, field) { autosave[field.name] = field.value; });
+              
+              // For each field in form
+              $fields.each(function(i, field) {
+                var $field = $(field), value = autosave[$field.prop('name')];
                 
+                // Saved value found
+                if (value !== false) {
+                  // What type of field are we dealing with?
+                  if ($field.is(':radio')) {
+                    $field.filter('[value="' + value + '"]').prop('checked', true);
+                  } else if ($field.is(':checkbox')) {
+                    $field.prop('checked', $field.val() === value ? true : false);
+                  } else if ($field.is('select')) {
+                    $field.find('option[value="' + value + '"]').prop('selected', true);
+                  } else {
+                    $field.val(value);
+                  }
+                  
                   // Makes sure element knows its been updated
-                  $element.trigger('change');
+                  $field.trigger('change');
                 }
               });
-            
+              
               // Callback
               settings.load();
-            
+              
               // Now we have loaded it, remove it
               $this.trigger('delete.autosave');
             },
