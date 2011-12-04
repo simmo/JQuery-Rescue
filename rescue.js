@@ -30,7 +30,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         if (options) $.extend(settings, options);
 
         return this.each(function(i) {
-          var $this = $(this), data = $this.data('autosave-config');
+          var $this = $(this), data = $this.data('rescue');
 
           // ID is required
           if (!$this.prop('id')) $.error('Form (#' + $this.index() + ') does not have an ID. An ID is required for jQuery.rescue.');
@@ -48,7 +48,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
 
             methods.check.apply($this);
 
-            $this.data('autosave-config', { initial_data: JSON.stringify($this.not(settings.exclude).serializeArray()) });
+            $this.data('rescue', { initial_data: JSON.stringify($this.not(settings.exclude).serializeArray()) });
 
             // Start autosave
             methods.start.apply($this);
@@ -100,7 +100,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           $form_data = $form_data.serializeArray();
           
           // Only continue if the form data is different to the initial data
-          if (!localStorage[$this.attr('id')] && $this.data('autosave-config').initial_data === JSON.stringify($form_data)) return;
+          if (!localStorage[$this.attr('id')] && $this.data('rescue').initial_data === JSON.stringify($form_data)) return;
           
           // Callback
           settings.saving();
@@ -183,7 +183,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           $(window).unbind('.autosave');
 
           // Remove data
-          $this.removeData('autosave-config');
+          $this.removeData('rescue');
         });
       }
     };
