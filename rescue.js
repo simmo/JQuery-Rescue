@@ -46,13 +46,20 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
               methods.delete.apply($this);
             });
 
+            methods.update.apply($this);
             methods.check.apply($this);
 
-            $this.data('rescue', { initial_data: JSON.stringify($this.not(settings.exclude).serializeArray()) });
+            $this.data('rescue').initial_data = JSON.stringify($this.data('rescue').fields.serializeArray());
 
             // Start autosave
             methods.start.apply($this);
           }
+        });
+      },
+      update: function() {
+        return this.each(function(i) {
+          var $this = $(this);
+          $this.data('rescue', { fields: $this.find('select[name], input[name]').not(settings.exclude) });
         });
       },
       start: function() {
@@ -91,13 +98,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
       },
       save: function() {
         return this.each(function() {
-          var $this = $(this), $form_data = $this.find('select, input'), $timestamp = new Date();
-
-          // Remove any exluded fields
-          if (settings.exclude !== '') $form_data = $form_data.not(settings.exclude);
-
-          // Serialise form data
-          $form_data = $form_data.serializeArray();
+          var $this = $(this), $form_data = $this.data('rescue').fields.serializeArray(), $timestamp = new Date();
           
           // Only continue if the form data is different to the initial data
           if (!localStorage[$this.prop('id')] && $this.data('rescue').initial_data === JSON.stringify($form_data)) return;
@@ -122,21 +123,16 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
       },
       load: function() {
         return this.each(function() {
-          var $this = $(this);
+          var $this = $(this), autosave = {};
 
           // Exit if no save found
           if (!localStorage[$this.prop('id')]) return;
-
-          var autosave = {}, $fields = $this.find('select, input:not([type=submit]):not([type=reset])');
-
-          // Remove any exluded fields
-          if (settings.exclude !== '') $fields = $fields.not(settings.exclude);
 
           // Format data
           $.each(localStorage.getObject($this.prop('id')).data, function(i, field) { autosave[field.name] = field.value; });
 
           // For each field in form
-          $fields.each(function(i, field) {
+          $this.data('rescue').fields.each(function(i, field) {
             var $field = $(field), value = autosave[$field.prop('name')];
 
             // Saved value found
