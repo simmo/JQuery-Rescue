@@ -80,9 +80,9 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           var $this = $(this);
 
           // If form has a save
-          if (localStorage[$this.attr('id')]) {
+          if (localStorage[$this.prop('id')]) {
             // Load save if callback returns true
-            if (settings.found(localStorage.getObject($this.attr('id')).form.saved) === true) methods.load.apply($this);
+            if (settings.found(localStorage.getObject($this.prop('id')).form.saved) === true) methods.load.apply($this);
             
             // Delete autosave
             methods.delete.apply($this);
@@ -100,18 +100,18 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           $form_data = $form_data.serializeArray();
           
           // Only continue if the form data is different to the initial data
-          if (!localStorage[$this.attr('id')] && $this.data('rescue').initial_data === JSON.stringify($form_data)) return;
+          if (!localStorage[$this.prop('id')] && $this.data('rescue').initial_data === JSON.stringify($form_data)) return;
           
           // Callback
           settings.saving();
 
           // Save form
-          localStorage.setObject($this.attr('id'), {
+          localStorage.setObject($this.prop('id'), {
             form: {
               saved: Math.ceil($timestamp.getTime()),
-              url: $this.attr('action'),
-              method: $this.attr('method'),
-              id: $this.attr('id')
+              url: $this.prop('action'),
+              method: $this.prop('method'),
+              id: $this.prop('id')
             },
             data: $form_data
           });
@@ -125,7 +125,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           var $this = $(this);
 
           // Exit if no save found
-          if (!localStorage[$this.attr('id')]) return;
+          if (!localStorage[$this.prop('id')]) return;
 
           var autosave = {}, $fields = $this.find('select, input:not([type=submit]):not([type=reset])');
 
@@ -133,7 +133,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           if (settings.exclude !== '') $fields = $fields.not(settings.exclude);
 
           // Format data
-          $.each(localStorage.getObject($this.attr('id')).data, function(i, field) { autosave[field.name] = field.value; });
+          $.each(localStorage.getObject($this.prop('id')).data, function(i, field) { autosave[field.name] = field.value; });
 
           // For each field in form
           $fields.each(function(i, field) {
@@ -166,7 +166,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
           var $this = $(this);
 
           // Remove save
-          localStorage.removeItem($this.attr('id'));
+          localStorage.removeItem($this.prop('id'));
 
           // Callback
           settings.delete();
