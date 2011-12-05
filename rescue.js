@@ -193,7 +193,7 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
     } else if (typeof method === 'object' || !method) {
       return methods.init.apply(this, arguments);
     } else {
-      $.error('Method ' + method + ' does not exist on jQuery.autosave');
+      $.error('Method ' + method + ' does not exist on jQuery.rescue');
     }
   };
 })(jQuery);
