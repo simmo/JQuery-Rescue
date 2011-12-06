@@ -67,7 +67,7 @@
       update: function() {
         return this.each(function(i) {
           var $this = $(this);
-          $this.data('rescue', { fields: $this.find('select[name], input[name]').not(settings.exclude) });
+          $this.data('rescue', { fields: $this.find('select[name], input[name], textarea[name]').not(settings.exclude) });
         });
       },
       start: function() {

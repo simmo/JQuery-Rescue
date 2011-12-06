@@ -33,7 +33,7 @@ p {
   margin-bottom: 2em;
 }
 
-input[type=text] {
+input[type=text], textarea {
   border: 1px solid #ddd;
   border-top-color: #bbb;
   padding: .5em;
