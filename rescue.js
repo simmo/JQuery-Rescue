@@ -1,11 +1,6 @@
-// Allow objects to be read and written to local storage
-Storage.prototype.setObject = function(key, value) { return this[key] = JSON.stringify(value); };
-Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
-
 (function($) {
   var $timer = [];
   
-  // Add autosave method to JQuery
   $.fn.rescue = function(method) {
     var settings = {
       duration: 1000,
@@ -22,13 +17,26 @@ Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         return confirm('We found an autosave from ' + time + '. Would you like to recover it?');
       },
       load: function() {},
-      delete: function() {}
+      delete: function() {},
+      error: function(code, message) {
+        if (typeof console.log == 'function') console.log('Error (' + code + '): ' + message);
+      }
     };
     
     var methods = {
       init: function(options) {
         if (options) $.extend(settings, options);
 
+        // Check for dependancies
+        if (typeof JSON.stringify == 'undefined' || typeof JSON.parse == 'undefined') { settings.error('1', 'JSON library required - Not supported by browser'); return; }
+        if (typeof localStorage == 'undefined') {
+          settings.error('2', 'localStorage required - Not supported by browser');
+          return;
+        } else {
+          if (typeof localStorage.setObject == 'undefined') Storage.prototype.setObject = function(key, value) { return this[key] = JSON.stringify(value); };
+          if (typeof localStorage.getObject == 'undefined') Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
+        }
+        
         return this.each(function(i) {
           var $this = $(this), data = $this.data('rescue');
 
