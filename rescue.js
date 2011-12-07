@@ -49,7 +49,7 @@
             settings.init();
 
             // Remove autosave when form submitted
-            $this.bind('submit.autosave', function() {
+            $this.bind('submit.rescue', function() {
               methods.stop.apply($this);
               methods.delete.apply($this);
             });
@@ -183,11 +183,8 @@
           // Stop autosaving
           methods.stop.apply($this);
 
-          // Remove autosave events
-          $(window).unbind('.autosave');
-
-          // Remove data
-          $this.removeData('rescue');
+          // Remove autosave events and data
+          $this.unbind('.rescue').removeData('rescue');
         });
       }
     };
