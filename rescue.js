@@ -1,6 +1,4 @@
 (function($) {
-  var $timer = [];
-  
   $.fn.rescue = function(method) {
     var settings = {
       duration: 1000,
@@ -75,7 +73,7 @@
           var $this = $(this);
           
           // Start autosave timer
-          $timer[i] = setInterval(function() { methods.save.apply($this); }, settings.duration);
+          $this.data('rescue').timer = setInterval(function() { methods.save.apply($this); }, settings.duration);
 
           // Callback
           settings.start();
@@ -83,8 +81,10 @@
       },
       stop: function() {
         return this.each(function(i) {
+          var $this = $(this);
+          
           // Stop timer
-          clearInterval($timer[i]);
+          clearInterval($this.data('rescue').timer);
 
           // Callback
           settings.stop();
