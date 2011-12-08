@@ -1,7 +1,6 @@
 body {
   font: 100% 'Open Sans', 'Helvetica Neue', Helvetica, Verdana, Arial, sans-serif;
-  background: #f5f5f5;
-  text-shadow: #fff 0 1px 1px;
+  background: #f3f3f3;
 }
 
 h1, h2 {
@@ -10,12 +9,16 @@ h1, h2 {
 }
 
 h1 {
-  margin-bottom: 1.5em;
+  width: 360px;
+  margin: 20px auto;
+  text-shadow: #fff 0 1px 1px;
 }
 
 h2 {
-  margin-bottom: .25em;
+  margin: 0;
+  margin-bottom: 5px;
   color: #999;
+  font-size: 1.4em;
   font-weight: normal;
 }
 
@@ -26,19 +29,48 @@ a {
 
 p {
   margin-top: 0;
-  margin-bottom: .5em;
+  margin-bottom: 10px;
+}
+
+form {
+  background: #fff;
+  width: 400px;
+  margin: 20px auto;
+  -webkit-box-shadow: rgba(0,0,0,.1) 1px 1px 3px;
+  -moz-box-shadow: rgba(0,0,0,.1) 1px 1px 3px;
+  -ms-box-shadow: rgba(0,0,0,.1) 1px 1px 3px;
+  -o-box-shadow: rgba(0,0,0,.1) 1px 1px 3px;
+  box-shadow: rgba(0,0,0,.1) 1px 1px 3px;
 }
 
 .row {
-  margin-bottom: 2em;
+  padding: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.actions {
+  padding: 20px;
+  border-bottom: none;
+  border-top: 1px solid #fff;
+  background: #f9f9f9;
+}
+
+.actions p {
+  margin-bottom: 0;
 }
 
 input[type=text], textarea {
   border: 1px solid #ddd;
   border-top-color: #bbb;
-  padding: .5em;
-  width: 300px;
+  padding: 5px;
+  width: 348px;
   font-size: 1em;
+  line-height: 1.5em;
+}
+
+textarea {
+  max-width: 348px;
 }
 
 input[type=submit] {
