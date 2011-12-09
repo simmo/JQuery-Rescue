@@ -36,13 +36,13 @@
         }
         
         return this.each(function(i) {
-          var $this = $(this), data = $this.data('rescue');
+          var $this = $(this);
 
           // ID is required
           if (!$this.prop('id')) $.error('Form (#' + $this.index() + ') does not have an ID. An ID is required for jQuery.rescue.');
 
           // Initalise if not loaded
-          if (!data) {
+          if (!$this.data('rescue')) {
             // Callback
             settings.init();
 
