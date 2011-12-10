@@ -45,9 +45,9 @@
           if (!$this.data('rescue')) {
             // Callback
             settings.init();
-
-            // Remove autosave when form submitted
-            $this.bind('submit.rescue', function() {
+            
+            // Create data object and add form events
+            $this.data('rescue', {}).bind('submit.rescue', function() {
               methods.stop.apply($this);
               methods.delete.apply($this);
             });
@@ -65,7 +65,9 @@
       update: function() {
         return this.each(function(i) {
           var $this = $(this);
-          $this.data('rescue', { fields: $this.find('select[name], input[name], textarea[name]').not(settings.exclude || false) });
+          $this.data('rescue').fields = $this.find('select[name], input[name], textarea[name]');
+          if (settings.exclude) $this.data('rescue').fields.not(settings.exclude);
+          $this.data('rescue').fields.bind('change.rescue keyup.rescue', function() { methods.save.apply($this); });
         });
       },
       start: function() {
