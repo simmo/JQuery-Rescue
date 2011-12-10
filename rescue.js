@@ -75,7 +75,7 @@
           var $this = $(this);
           
           // Start autosave timer
-          $this.data('rescue').timer = setInterval(function() { methods.save.apply($this); }, settings.duration);
+          if (settings.duration) $this.data('rescue').timer = setInterval(function() { methods.save.apply($this); }, settings.duration);
 
           // Callback
           settings.start();
