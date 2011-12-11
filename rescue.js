@@ -2,7 +2,7 @@
 (function($) {
   $.fn.rescue = function(method) {
     var settings = {
-      duration: 1000,
+      timer: 1000,
       exclude: '',
       saving: function() {},
       saved: function(timestamp) {},
@@ -66,7 +66,7 @@
           var $this = $(this);
           
           // Start autosave timer
-          if (settings.duration) $this.data('rescue').timer = setInterval(function() { methods.save.apply($this); }, settings.duration);
+          if (settings.timer) $this.data('rescue').timer = setInterval(function() { methods.save.apply($this); }, settings.timer);
         });
       },
       stop: function() {
