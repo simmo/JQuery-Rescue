@@ -37,6 +37,7 @@ Or if your feeling brave, you can specify a data attribute on your form tag(s).
 
 The local storage entry for a form will be deleted when the contents are recovered. 
 
+### Settings
 The following options can be set:
 
     $('form').rescue({
@@ -49,7 +50,6 @@ The following options can be set:
       error: function(code, message) {}
     });
 
-### Settings
 `timer` Sets an interval to save the data as well as on interaction with the form's fields. Set this to **0** to disable the timer.
 
 `exclude` If there are fields you don't wish to Rescue. Example: `input[type=password], input[name=secret]`.
