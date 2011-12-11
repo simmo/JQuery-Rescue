@@ -3,7 +3,7 @@ JQuery Rescue
 
 Welcome
 -------
-JQuery Rescue is a simple plugin that allows a user to autosave and recover the contents of a form, on the client-side, using HTML5 local storage.
+JQuery Rescue is a simple, lightweight plugin (**3.1KB** - Minified) that allows a user to autosave and recover the contents of a form, on the client-side, using HTML5 local storage.
 The main goal of Rescue is to reduce the risk of losing data and act as a safety net.
 
 Requirements
@@ -18,3 +18,29 @@ However, Rescue relies on the client browser to support JSON and localStorage. Y
 * Chrome 12 +
 * Safari 4 +
 * Opera 10.6 +
+
+Usage
+-----
+This will allow all forms to be rescued.
+`$('form').rescue();`
+
+Or if your feeling brave, you can specify a data attribute on your form tag(s).
+
+HTML:
+`<form data-rescue="true">...</form>`
+
+JavaScript:
+`$('[data-rescue=true]').rescue();`
+
+The local storage entry for a form will be deleted when the contents are recovered. 
+
+The following options can be set:
+`$('form').rescue({
+  timer: 1000,
+  exclude: '',
+  saving: function() {},
+  saved: function(timestamp) {},
+  load: function() {},
+  delete: function() {},
+  error: function(code, message) {}
+});`
