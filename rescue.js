@@ -5,12 +5,6 @@
       exclude: '',
       saving: function() {},
       saved: function(timestamp) {},
-      found: function(timestamp) {
-        var saved_on = new Date(timestamp), time = saved_on.getFullYear() + '-' + saved_on.getMonth() + '-' + saved_on.getDate() + ' @ ' + saved_on.getHours() + ':' + saved_on.getMinutes();
-        
-        // Check if user want to load autosave
-        return confirm('We found an autosave from ' + time + '. Would you like to recover it?');
-      },
       load: function() {},
       delete: function() {},
       error: function(code, message) {
@@ -47,7 +41,9 @@
             });
 
             methods.update.apply($this);
-            methods.check.apply($this);
+            
+            // Autosave found?
+            if (localStorage[$this.prop('id')]) methods.load.apply($this);
 
             $this.data('rescue').initial_data = JSON.stringify($this.data('rescue').fields.serializeArray());
 
@@ -78,20 +74,6 @@
           
           // Stop timer
           clearInterval($this.data('rescue').timer);
-        });
-      },
-      check: function() {
-        return this.each(function() {
-          var $this = $(this);
-
-          // If form has a save
-          if (localStorage[$this.prop('id')]) {
-            // Load save if callback returns true
-            if (settings.found(localStorage.getObject($this.prop('id')).form.saved) === true) methods.load.apply($this);
-            
-            // Delete autosave
-            methods.delete.apply($this);
-          }
         });
       },
       save: function() {
@@ -150,6 +132,9 @@
               $field.trigger('change');
             }
           });
+          
+          // Remove save
+          methods.delete.apply($this);
           
           // Callback
           settings.load();
