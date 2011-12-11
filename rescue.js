@@ -1,3 +1,4 @@
+/* JQuery Rescue - Mike Simmonds - https://github.com/MikeSimmonds/JQuery-Rescue */
 (function($) {
   $.fn.rescue = function(method) {
     var settings = {
