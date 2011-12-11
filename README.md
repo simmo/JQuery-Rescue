@@ -22,25 +22,44 @@ However, Rescue relies on the client browser to support JSON and localStorage. Y
 Usage
 -----
 This will allow all forms to be rescued.
-`$('form').rescue();`
+
+    $('form').rescue();
 
 Or if your feeling brave, you can specify a data attribute on your form tag(s).
 
-HTML:
-`<form data-rescue="true">...</form>`
+**HTML:**
 
-JavaScript:
-`$('[data-rescue=true]').rescue();`
+    <form data-rescue="true">...</form>
+
+**JavaScript:**
+
+    $('[data-rescue=true]').rescue();
 
 The local storage entry for a form will be deleted when the contents are recovered. 
 
 The following options can be set:
-`$('form').rescue({
-  timer: 1000,
-  exclude: '',
-  saving: function() {},
-  saved: function(timestamp) {},
-  load: function() {},
-  delete: function() {},
-  error: function(code, message) {}
-});`
+
+    $('form').rescue({
+      timer: 1000,
+      exclude: '',
+      saving: function() {},
+      saved: function(timestamp) {},
+      load: function() {},
+      delete: function() {},
+      error: function(code, message) {}
+    });
+
+### Settings
+`timer` Sets an interval to save the data as well as on interaction with the form's fields. Set this to **0** to disable the timer.
+
+`exclude` If there are fields you don't wish to Rescue. Example: `input[type=password], input[name=secret]`.
+
+`saving` This function is fired when the form is saving.
+
+`saved` Once the form has saved this function is fired.
+
+`load` When the form recovers data, this function is called.
+
+`delete` This function is fired when recovered data is removed.
+
+`error` Fired when something goes wrong.
