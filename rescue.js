@@ -3,9 +3,6 @@
     var settings = {
       duration: 1000,
       exclude: '',
-      init: function() {},
-      start: function() {},
-      stop: function() {},
       saving: function() {},
       saved: function(timestamp) {},
       found: function(timestamp) {
@@ -43,9 +40,6 @@
 
           // Initalise if not loaded
           if (!$this.data('rescue')) {
-            // Callback
-            settings.init();
-            
             // Create data object and add form events
             $this.data('rescue', {}).bind('submit.rescue', function() {
               methods.stop.apply($this);
@@ -76,9 +70,6 @@
           
           // Start autosave timer
           if (settings.duration) $this.data('rescue').timer = setInterval(function() { methods.save.apply($this); }, settings.duration);
-
-          // Callback
-          settings.start();
         });
       },
       stop: function() {
@@ -87,9 +78,6 @@
           
           // Stop timer
           clearInterval($this.data('rescue').timer);
-
-          // Callback
-          settings.stop();
         });
       },
       check: function() {
