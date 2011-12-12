@@ -35,7 +35,7 @@ Or if your feeling brave, you can specify a data attribute on your form tag(s).
 
     $('[data-rescue=true]').rescue();
 
-The local storage entry for a form will be deleted when the contents are recovered. 
+The local storage entry for a form will be deleted when the contents are recovered, when a form is submitted or reset.
 
 ### Settings
 The following options can be set:

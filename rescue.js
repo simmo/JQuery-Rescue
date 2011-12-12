@@ -47,9 +47,16 @@
           // Initalise if not loaded
           if (!$this.data('rescue')) {
             // Create data object and add form events
-            $this.data('rescue', {}).bind('submit.rescue', function() {
-              methods.stop.apply($this);
-              methods.delete.apply($this);
+            $this.data('rescue', {}).bind({
+              'submit.rescue': function() {
+                methods.stop.apply($this);
+                methods.delete.apply($this);
+              },
+              'reset.rescue': function() {
+                methods.stop.apply($this);
+                methods.delete.apply($this);
+                methods.start.apply($this);
+              }
             });
 
             methods.update.apply($this);
