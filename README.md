@@ -52,14 +52,18 @@ The following options can be set:
 
 `timer` Sets an interval to save the data as well as on interaction with the form's fields. Set this to **0** to disable the timer.
 
-`exclude` If there are fields you don't wish to Rescue. Example: `input[type=password], input[name=secret]`.
+`exclude` If there are fields you don't wish to Rescue. Example: `exclude: 'input[type=password], input[name=secret]'`
 
 `saving` This function is fired when the form is saving.
 
-`saved` Once the form has saved this function is fired.
+`saved(timestamp)` Once the form has saved this function is fired. A timestamp is also provided.
 
 `load` When the form recovers data, this function is called.
 
 `delete` This function is fired when recovered data is removed.
 
-`error` Fired when something goes wrong.
+`error(code, message)` Fired when something goes wrong. An error code and message is provided.
+
+Possible values:
+
+* **1**: Insufficient browser support
