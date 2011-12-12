@@ -1,6 +1,19 @@
 /* JQuery Rescue - Mike Simmonds - https://github.com/MikeSimmonds/JQuery-Rescue */
 (function($) {
   $.fn.rescue = function(method) {
+    var supported = function() {
+      try {
+        var a = 'a';
+        localStorage.setItem(a, a);
+        localStorage.removeItem(a);
+        a = JSON.stringify(a);
+        JSON.parse(a);
+        return true;
+      } catch(e) {
+        return false;
+      }
+    };
+    
     var settings = {
       timer: 1000,
       exclude: '',
@@ -18,14 +31,12 @@
         if (options) $.extend(settings, options);
 
         // Check for dependancies
-        if (typeof JSON.stringify == 'undefined' || typeof JSON.parse == 'undefined') { settings.error('1', 'JSON library required - Not supported by browser'); return; }
-        if (typeof localStorage == 'undefined') {
-          settings.error('2', 'localStorage required - Not supported by browser');
+        if (!supported()) {
+          settings.error('1', 'Insufficient browser support');
           return;
-        } else {
-          if (typeof localStorage.setObject == 'undefined') Storage.prototype.setObject = function(key, value) { return this[key] = JSON.stringify(value); };
-          if (typeof localStorage.getObject == 'undefined') Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         }
+        if (typeof localStorage.setObject == 'undefined') Storage.prototype.setObject = function(key, value) { return this[key] = JSON.stringify(value); };
+        if (typeof localStorage.getObject == 'undefined') Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         
         return this.each(function(i) {
           var $this = $(this);
