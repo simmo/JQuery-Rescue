@@ -74,7 +74,7 @@
       update: function() {
         return this.each(function(i) {
           var $this = $(this);
-          $this.data('rescue').fields = $this.find('select[name], input[name], textarea[name]');
+          $this.data('rescue').fields = $this.find('select[name], input[name]:not([type=submit], [type=reset], [type=button]), textarea[name]');
           if (settings.exclude) $this.data('rescue').fields.not(settings.exclude);
           $this.data('rescue').fields.bind('change.rescue keyup.rescue', function() { methods.save.apply($this); });
         });
