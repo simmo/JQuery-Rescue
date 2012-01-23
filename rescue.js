@@ -35,7 +35,13 @@
           settings.error('1', 'Insufficient browser support');
           return;
         }
-        if (typeof localStorage.setObject == 'undefined') Storage.prototype.setObject = function(key, value) { return this[key] = JSON.stringify(value); };
+        if (typeof localStorage.setObject == 'undefined') Storage.prototype.setObject = function(key, value) {
+          try {
+            return this[key] = JSON.stringify(value);
+          } catch(e) {
+            if (e.name == 'QUOTA_EXCEEDED_ERR') settings.error('2', 'Storage quota exceeded');
+          }
+        };
         if (typeof localStorage.getObject == 'undefined') Storage.prototype.getObject = function(key) { return JSON.parse(this[key]); };
         
         return this.each(function(i) {
@@ -106,7 +112,7 @@
           settings.saving();
 
           // Save form
-          localStorage.setObject($this.prop('id'), {
+          if (localStorage.setObject($this.prop('id'), {
             form: {
               saved: Math.ceil($timestamp.getTime()),
               url: $this.prop('action'),
@@ -114,10 +120,7 @@
               id: $this.prop('id')
             },
             data: $form_data
-          });
-
-          // Callback
-          settings.saved($timestamp);
+          })) settings.saved($timestamp);
         });
       },
       load: function() {

@@ -67,3 +67,4 @@ The following options can be set:
 Possible values:
 
 * **1**: Insufficient browser support
+* **2**: Storage quota exceeded
