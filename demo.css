@@ -1,0 +1,107 @@
+html, body {
+  background: #fcfcfc;
+}
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #6E9AE0;
+  text-decoration: none;
+}
+
+section > header h1 {
+  font-size: 3em;
+  line-height: 1;
+  margin-bottom: .1em;
+  display: inline-block;
+}
+section > header h2 {
+  color: #aaa;
+  line-height: 1;
+  font-weight: normal;
+  display: inline-block;
+}
+section > header hgroup + p {
+  font-size: 1.3em;
+  font-weight: 300;
+  color: #222;
+}
+
+article {
+  margin-top: 3em;
+}
+article h1 {
+  font-size: 2em;
+  margin-bottom: .1em;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+code {
+  background: #222;
+  color: #fff;
+  border-radius: 3px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  padding: 20px;
+  white-space: pre;
+  margin-top: -1em;
+  box-shadow: rgba(0,0,0,.5) 0 3px 10px inset, #fff 0 1px 0;
+}
+
+.actions, h2, h3 {
+  margin-top: 2em;
+}
+
+input[type=text], textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-top-color: #bbb;
+  padding: 5px;
+  width: 100%;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type=submit], input[type=reset] {
+  background: #8ebe00;
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.1) 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.3));
+  background-image: -moz-linear-gradient(rgba(255,255,255,.1) 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.3));
+  background-image: -ms-linear-gradient(rgba(255,255,255,.1) 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.3));
+  background-image: -o-linear-gradient(rgba(255,255,255,.1) 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.3));
+  background-image: linear-gradient(rgba(255,255,255,.1) 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.3));
+  padding: .5em 1em;
+  font-weight: bold;
+  font-size: 1em;
+  color: #fff;
+  text-shadow: rgba(0,0,0,.3) 0 -1px 0;
+  border-radius: .3em;
+  border: 1px solid #709d18;
+  -webkit-box-shadow: rgba(255,255,255,.5) 0 1px 0 inset, rgba(0,0,0,.3) 0 1px 5px;
+  -moz-box-shadow: rgba(255,255,255,.5) 0 1px 0 inset, rgba(0,0,0,.3) 0 1px 5px;
+  box-shadow: rgba(255,255,255,.5) 0 1px 0 inset, rgba(0,0,0,.3) 0 1px 5px;
+}
+
+input[type=reset] {
+  background-color: #A73F30;
+  border-color: #8D3C30;
+}
+
+input[type=submit]:active, input[type=reset]:active {
+  background-image: none;
+  color: rgba(255,255,255,.8);
+}
