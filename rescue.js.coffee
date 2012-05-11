@@ -1,4 +1,4 @@
-# JQuery Rescue - Mike Simmonds - https://github.com/MikeSimmonds/JQuery-Rescue
+# JQuery Rescue - Mike Simmonds - https://github.com/simmo/JQuery-Rescue
 $ = jQuery
 $.fn.rescue = (method) ->
   supported = ->
